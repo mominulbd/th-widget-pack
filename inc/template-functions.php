@@ -75,8 +75,25 @@ function themo_display_button( $instance ) {
 	}
 }
 
+function themo_portfolio_post() { ?>
+	<div id="post-130" class=" th-portfolio-item item col-md-3 col-sm-6 p-development p-integration post-130 status-publish format-standard has-post-thumbnail hentry themo_project_type-development themo_project_type-integration">
+		<div class="th-port-wrap">
+			<img width="500" height="500" src="http://stratus-3c99.kxcdn.com/stratus/wp-content/uploads/2015/03/office-800-380x380.jpg" class="img-responsive th-port-img wp-post-image" alt="Office" srcset="http://stratus-3c99.kxcdn.com/stratus/wp-content/uploads/2015/03/office-800-380x380.jpg 380w, http://demo.themovation.com/stratus/wp-content/uploads/2015/03/office-800-150x150.jpg 150w, http://demo.themovation.com/stratus/wp-content/uploads/2015/03/office-800-180x180.jpg 180w, http://demo.themovation.com/stratus/wp-content/uploads/2015/03/office-800-300x300.jpg 300w, http://demo.themovation.com/stratus/wp-content/uploads/2015/03/office-800-60x60.jpg 60w" sizes="(max-width: 380px) 100vw, 380px" />
+			<div class="th-port-overlay"></div>
+			<div class="th-port-inner">
+				<div class="th-port-center">
+					<i class="th-port-icon glyphicons glyphicons-lightbulb"></i>
+					<h3 class="th-port-title">Idea Collaboration</h3>
+					<p class="th-port-sub">Malesuada tortor nunc</p>
+				</div>
+				<a class="th-port-link" href="#"></a>
+			</div>
+		</div>
+	</div>
+<?php }
+
 /**
 * GLOBAL VARIABLES
 */
-global $th_acc_count, $th_acc_panel_count;
-$th_acc_panel_count = $th_acc_count = 0;
+global $th_acc_count, $th_acc_panel_count, $th_folio_count;
+$th_acc_panel_count = $th_acc_count = $th_folio_count = 0;

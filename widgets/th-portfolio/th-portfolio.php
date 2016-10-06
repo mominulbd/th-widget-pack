@@ -36,7 +36,7 @@ class Themovation_SO_WB_Portfolio_Widget extends SiteOrigin_Widget {
 					'default' => 'none',
 					'label'   => __('Select Individually', 'themovation-widgets'),
 					'multiple' => true,
-					'options' => array(),
+					'options' => $this->get_themo_portfolio_list(),
 				),
 
 				'group'    => array(
@@ -44,7 +44,7 @@ class Themovation_SO_WB_Portfolio_Widget extends SiteOrigin_Widget {
 					'default' => 'none',
 					'label'   => __('Select by Group', 'themovation-widgets'),
 					'multiple' => true,
-					'options' => array(),
+					'options' => $this->get_themo_portfolio_cats(),
 				),
 
 				'order'    => array(
