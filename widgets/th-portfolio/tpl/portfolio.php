@@ -6,19 +6,19 @@ $column_number = $instance['columns'];
 switch( $column_number ) {
 	case 2:
 		$portfolio_row = ' two-columns';
-		$portfolio_item = ' col-sm-6';
+		$portfolio_item = array('th-portfolio-item', 'col-sm-6');
 		break;
 	case 3:
 		$portfolio_row = ' three-columns';
-		$portfolio_item = ' col-md-4 col-sm-6';
+		$portfolio_item = array('th-portfolio-item', 'col-md-4', 'col-sm-6');
 		break;
 	case 4:
 		$portfolio_row = ' four-columns';
-		$portfolio_item = ' col-md-3 col-sm-6';
+		$portfolio_item = array('th-portfolio-item', 'col-md-3', 'col-sm-6');
 		break;
 	case 5:
 		$portfolio_row = ' five-columns';
-		$portfolio_item = ' col-md-2 col-sm-6';
+		$portfolio_item = array('th-portfolio-item', 'col-md-2', 'col-sm-6');
 		break;
 	default:
 		$portfolio_row = '';
@@ -39,7 +39,7 @@ switch( $column_number ) {
 			$tax_terms = get_terms( $taxonomy );
 
 			foreach ( $tax_terms as $tax_term ) {
-				echo '<a href="#"" data-filter="#th-portfolio-content .p-' . $tax_term->slug . '">' . $tax_term->name .'</a>';
+				echo '<a href="#" data-filter="#th-portfolio-content .p-' . $tax_term->slug . '">' . $tax_term->name .'</a>';
 			}
 			?>
 		</div>
@@ -48,7 +48,93 @@ switch( $column_number ) {
 
 	<div id="th-portfolio-row" class="th-portfolio-row row portfolio_content <?php echo $portfolio_row; ?>">
 
+		<?php
 
+		$args = array();
+
+		if ( $instance['individual'] != 'none' ) {
+			if ( is_array( $instance['individual'] ) ) {
+				if ( in_array( 'none', $instance['individual'] ) ) {
+					$instance['individual'] = array_diff( $instance['individual'], array('none') );
+				}
+
+				$post_ids = $instance['individual'];
+			} else {
+				$post_ids = array($instance['individual']);
+			}
+			$args['post__in'] = $post_ids;
+		}
+
+		$args['post_type'] = array( 'themo_portfolio' );
+
+		if ( $instance['group'] != 'none' ) {
+			if ( is_array( $instance['group'] ) ) {
+				if ( in_array( 'none', $instance['group'] ) ) {
+					$instance['group'] = array_diff( $instance['group'], array('none') );
+				}
+
+				$project_type_id = $instance['group'];
+			} else {
+				$project_type_id = array($instance['group']);
+			}
+			$args['tax_query'] = array(
+				array(
+					'taxonomy' => 'themo_project_type',
+					'field'    => 'term_id',
+					'terms'    => $project_type_id,
+				),
+			);
+		}
+
+		if ( $instance['order'] == 'date' ) {
+			$args['orderby'] = 'date';
+		}
+
+		// The Query
+		$query = new WP_Query( $args );
+
+		// The Loop
+		if ( $query->have_posts() ) {
+			while ( $query->have_posts() ) {
+				$query->the_post();
+
+				$terms = get_the_terms( $post->ID, 'themo_project_type' );
+
+				if ( $terms && ! is_wp_error( $terms ) ) :
+
+					$filtering_links = array();
+
+					foreach ( $terms as $term ) {
+						$filtering_links[] = 'p-' . $term->slug;
+					}
+
+				endif;
+
+				$classes = array_merge( $portfolio_item, $filtering_links );
+				?>
+				<div id="post-<?php the_ID(); ?>" <?php post_class( $classes ); ?>>
+					<div class="th-port-wrap">
+						<?php the_post_thumbnail(); ?>
+						<div class="th-port-overlay"></div>
+						<div class="th-port-inner">
+							<div class="th-port-center">
+								<i class="th-port-icon glyphicons glyphicons-lightbulb"></i>
+								<h3 class="th-port-title"><?php the_title(); ?></h3>
+								<p class="th-port-sub">Malesuada tortor nunc</p>
+							</div>
+							<a class="th-port-link" href="#"></a>
+						</div>
+					</div>
+				</div>
+				<?php
+			}
+		} else {
+			// no posts found
+		}
+
+		// Restore original Post Data
+		wp_reset_postdata();
+		?>
 
 	</div>
 
