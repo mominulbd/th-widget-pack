@@ -88,6 +88,9 @@ switch( $column_number ) {
 
 		if ( $instance['order'] == 'date' ) {
 			$args['orderby'] = 'date';
+		} elseif ( $instance['order'] == 'menu_order' ) {
+			$args['orderby'] = 'menu_order';
+			$args['order'] = 'ASC';
 		}
 
 		// The Query
