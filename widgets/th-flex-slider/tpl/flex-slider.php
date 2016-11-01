@@ -61,6 +61,22 @@ $init_main_loop = 0;
 								</div>
 							<?php endif; ?>
 
+							<?php if ( $slide['image']['image'] ) : ?>
+
+								<div class="page-title-image">
+
+									<?php $image = wp_get_attachment_image( $slide['image']['image'], 'full', false, array( 'class' => 'hero wp-post-image' ) ); ?>
+
+									<?php if( $slide['image']['link']['link']['url'] ) {
+										themo_display_link( $slide['image']['link'], '', $image );
+									} else {
+										echo $image;
+									} ?>
+
+								</div>
+
+							<?php endif; ?>
+
 						</div><!-- /.row -->
 
 					</div><!-- /.container -->
