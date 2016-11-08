@@ -64,17 +64,10 @@ class Themovation_SO_WB_FlexSlider_Widget extends SiteOrigin_Widget {
 							'hide' => false
 						),
 
-						'button_1' => array(
+						'button' => array(
 							'type' => 'widget',
 							'class' => 'Themovation_SO_WB_Button_Widget',
-							'label' => __('Button 1', 'themovation-widgets'),
-							'hide' => false
-						),
-
-						'button_2' => array(
-							'type' => 'widget',
-							'class' => 'Themovation_SO_WB_Button_Widget',
-							'label' => __('Button 2', 'themovation-widgets'),
+							'label' => __('Button', 'themovation-widgets'),
 							'hide' => false
 						),
 
