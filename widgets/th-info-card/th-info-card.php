@@ -1,25 +1,25 @@
 <?php
 /*
-Widget Name: Themovation Feature
-Description: A featured content block. Includes photo, heading, text and more.
+Widget Name: Themovation Info Card
+Description: An styled question and answer list. Ideal for FAQs.
 Author: Themovation
 Author URI: themovation.com
 */
 
 if( !class_exists( 'Themovation_Widget_Base' ) ) include_once plugin_dir_path(​THEMOVATION_BASE_FILE) . '/inc/base.class.php';
 
-class Themovation_SO_WB_Feature_Widget extends Themovation_Widget_Base {
+class Themovation_SO_WB_InfoCard_Widget extends Themovation_Widget_Base {
 
 	function __construct() {
 
 		parent::__construct(
 
-			'th-feature',
+			'th-info-card',
 
-			__('Themovation Feature', 'themovation-widgets'),
+			__('Themovation Info Card', 'themovation-widgets'),
 
 			array(
-				'description' => __('A featured content block. Includes photo, heading, text and more.', 'themovation-widgets'),
+				'description' => __('An styled question and answer list. Ideal for FAQs.', 'themovation-widgets'),
 				'help'        => '',
 			),
 
@@ -27,14 +27,6 @@ class Themovation_SO_WB_Feature_Widget extends Themovation_Widget_Base {
 			),
 
 			array(
-				'image' => array(
-					'type' => 'media',
-					'fallback' => false,
-					'label' => __('Image', 'themovation-widgets'),
-					'default'     => '',
-					'library' => 'image',
-				),
-
 				'icon' => array(
 					'type' => 'section',
 					'label' => __('Icon' , 'themovation-widgets'),
@@ -63,11 +55,29 @@ class Themovation_SO_WB_Feature_Widget extends Themovation_Widget_Base {
 					),
 				),
 
-				'link' => array(
+				'button_1' => array(
 					'type' => 'section',
-					'label' => __('Link' , 'themovation-widgets'),
+					'label' => __('Button 1' , 'themovation-widgets'),
 					'hide' => true,
-					'fields' => $this->link_form_fields()
+					'fields' => $this->button_1_form_fields()
+				),
+
+				'button_2' => array(
+					'type' => 'section',
+					'label' => __('Button 2' , 'themovation-widgets'),
+					'hide' => true,
+					'fields' => $this->button_2_form_fields()
+				),
+
+				'align' => array(
+					'type' => 'radio',
+					'label' => __('Align Calendar', 'themovation-widgets'),
+					'default' => 'centered',
+					'options' => array(
+						'left' => __('Left', 'themovation-widgets'),
+						'centered' => __('Center', 'themovation-widgets'),
+						'right' => __('Right', 'themovation-widgets'),
+					)
 				),
 
 				'background' => array(
@@ -81,6 +91,15 @@ class Themovation_SO_WB_Feature_Widget extends Themovation_Widget_Base {
 							'label' => __('Background Color', 'themovation-widgets'),
 						),
 
+						'opacity' => array(
+							'type' => 'slider',
+							'label' => __('Opacity', 'themovation-widgets'),
+							'default' => 100,
+							'min' => 0,
+							'max' => 100,
+							'integer' => true,
+						),
+
 						'contrast'    => array(
 							'type'    => 'radio',
 							'default' => 'dark',
@@ -91,7 +110,23 @@ class Themovation_SO_WB_Feature_Widget extends Themovation_Widget_Base {
 							),
 						),
 					)
-				)
+				),
+
+				'border-color' => array(
+					'type' => 'color',
+					'label' => __('Border Color', 'themovation-widgets'),
+				),
+
+				'card-align' => array(
+					'type' => 'radio',
+					'label' => __('Card Alignment', 'themovation-widgets'),
+					'default' => 'centered',
+					'options' => array(
+						'left' => __('Left', 'themovation-widgets'),
+						'centered' => __('Center', 'themovation-widgets'),
+						'right' => __('Right', 'themovation-widgets'),
+					)
+				),
 			),
 
 			plugin_dir_path(__FILE__)
@@ -99,7 +134,7 @@ class Themovation_SO_WB_Feature_Widget extends Themovation_Widget_Base {
 	}
 
 	function get_template_name($instance) {
-		return 'feature';
+		return 'info-card';
 	}
 
 	function get_style_name($instance) {
@@ -110,10 +145,10 @@ class Themovation_SO_WB_Feature_Widget extends Themovation_Widget_Base {
 
 		$this->register_frontend_styles(
 			array(
-				array( 'themo-feature', plugin_dir_url(__FILE__) . 'styles/feature.css', array(), ​THEMOVATION_WB_VER )
+				array( 'themo-info-card', plugin_dir_url(__FILE__) . 'styles/info-card.css', array(), ​THEMOVATION_WB_VER )
 			)
 		);
 
 	}
 }
-siteorigin_widget_register('th-feature', __FILE__, 'Themovation_SO_WB_Feature_Widget');
+siteorigin_widget_register('th-info-card', __FILE__, 'Themovation_SO_WB_InfoCard_Widget');

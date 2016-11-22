@@ -6,7 +6,9 @@ Author: Themovation
 Author URI: themovation.com
 */
 
-class Themovation_SO_WB_Service_Widget extends SiteOrigin_Widget {
+if( !class_exists( 'Themovation_Widget_Base' ) ) include_once plugin_dir_path(​THEMOVATION_BASE_FILE) . '/inc/base.class.php';
+
+class Themovation_SO_WB_Service_Widget extends Themovation_Widget_Base {
 
 	function __construct() {
 
@@ -58,17 +60,17 @@ class Themovation_SO_WB_Service_Widget extends SiteOrigin_Widget {
 						),
 
 						'icon' => array(
-							'type' => 'widget',
-							'class' => 'Themovation_SO_WB_Icon_Widget',
-							'label' => __('Icon', 'themovation-widgets'),
-							'hide' => false
+							'type' => 'section',
+							'label' => __('Icon' , 'themovation-widgets'),
+							'hide' => true,
+							'fields' => $this->icon_form_fields()
 						),
 
 						'link' => array(
-							'type' => 'widget',
-							'class' => 'Themovation_SO_WB_Link_Widget',
-							'label' => __('Link', 'themovation-widgets'),
-							'hide' => false
+							'type' => 'section',
+							'label' => __('Link' , 'themovation-widgets'),
+							'hide' => true,
+							'fields' => $this->link_form_fields()
 						),
 					)
 				),
@@ -81,6 +83,19 @@ class Themovation_SO_WB_Service_Widget extends SiteOrigin_Widget {
 						'left' => __('Left - Horizontal', 'themovation-widgets'),
 						'right' => __('Right - Horizontal', 'themovation-widgets'),
 						'vert' => __('Center - Vertical', 'themovation-widgets'),
+					)
+				),
+
+				'row' => array(
+					'type' => 'radio',
+					'label' => __('Service Blocks per Row', 'themovation-widgets'),
+					'default' => '3',
+					'options' => array(
+						'1' => __('1', 'themovation-widgets'),
+						'2' => __('2', 'themovation-widgets'),
+						'3' => __('3', 'themovation-widgets'),
+						'4' => __('4', 'themovation-widgets'),
+						'5' => __('5', 'themovation-widgets'),
 					)
 				),
 			),
