@@ -6,19 +6,19 @@ $column_number = $instance['columns'];
 switch( $column_number ) {
 	case 2:
 		$portfolio_row = ' two-columns';
-		$portfolio_item = array('th-portfolio-item', 'col-sm-6');
+		$portfolio_item = array('th-portfolio-item', 'item', 'col-sm-6');
 		break;
 	case 3:
 		$portfolio_row = ' three-columns';
-		$portfolio_item = array('th-portfolio-item', 'col-md-4', 'col-sm-6');
+		$portfolio_item = array('th-portfolio-item', 'item', 'col-md-4', 'col-sm-6');
 		break;
 	case 4:
 		$portfolio_row = ' four-columns';
-		$portfolio_item = array('th-portfolio-item', 'col-md-3', 'col-sm-6');
+		$portfolio_item = array('th-portfolio-item', 'item', 'col-md-3', 'col-sm-6');
 		break;
 	case 5:
 		$portfolio_row = ' five-columns';
-		$portfolio_item = array('th-portfolio-item', 'col-md-2', 'col-sm-6');
+		$portfolio_item = array('th-portfolio-item', 'item', 'col-md-2', 'col-sm-6');
 		break;
 	default:
 		$portfolio_row = '';
@@ -132,7 +132,10 @@ switch( $column_number ) {
 				<?php
 			}
 		} else {
-			// no posts found
+			echo '<div class="alert">';
+			_e('Sorry, no results were found.', 'themovation-widgets');
+			echo '</div>';
+			get_search_form();
 		}
 
 		// Restore original Post Data
